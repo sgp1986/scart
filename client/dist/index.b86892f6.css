@@ -206,11 +206,19 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.add-form.visible .add-product-button {
+.add-form h3, .add-form form, .add-form.visible .add-product-button {
   display: none;
 }
 
 .add-form.visible h3, .add-form.visible form {
+  display: block;
+}
+
+.edit-form {
+  display: none;
+}
+
+.edit-form.visible {
   display: block;
 }
 

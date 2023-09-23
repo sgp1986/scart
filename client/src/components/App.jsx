@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Header from "./Header"
 import ProductListing from "./ProductListing"
 import AddForm from "./AddForm"
-import { getProducts, createProduct, deleteProduct } from "../services/products"
+import { getProducts, createProduct, editProduct, deleteProduct } from "../services/products"
 
 const App = () => {
   const [products, setProducts] = useState([])
@@ -29,9 +29,31 @@ const App = () => {
 
   const handleDeleteProduct = async (e, id) => {
     e.preventDefault()
-    const removed = products.filter(prod => prod._id != id)
-    await deleteProduct(id)
-    setProducts(removed)
+    try {
+      const removed = products.filter(prod => prod._id != id)
+      await deleteProduct(id)
+      setProducts(removed)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const handleEditProduct = async (e, {id, ...productDetails}) => {
+    e.preventDefault()
+    const product = {
+      title: productDetails.newTitle,
+      price: productDetails.newPrice,
+      quantity: productDetails.newQuantity
+    }
+    console.log(product)
+    try {
+      const data = await editProduct(id, product)
+      console.log(data)
+      console.log(products)
+      // setProducts(data)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
 
@@ -39,7 +61,11 @@ const App = () => {
     <div className="app">
       <Header />
       <main>
-        <ProductListing products={products} onDeleteClick={handleDeleteProduct} />
+        <ProductListing
+          products={products}
+          handleEditProduct={handleEditProduct}
+          handleDeleteProduct={handleDeleteProduct}
+        />
         <AddForm onFormSubmit={handleFormSubmit} />
       </main>
     </div>

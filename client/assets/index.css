@@ -170,7 +170,7 @@ input[type="number"] {
 
 .add-form h3,
 .add-form form {
-  /* display: none; */
+  display: none;
 }
 
 .add-form.visible .add-product-button {
@@ -179,6 +179,14 @@ input[type="number"] {
 
 .add-form.visible h3,
 .add-form.visible form {
+  display: block;
+}
+
+.edit-form {
+  display: none;
+}
+
+.edit-form.visible {
   display: block;
 }
 

@@ -2,7 +2,7 @@ import Product from "./Product"
 
 
 
-const ProductListing = ({ products, onDeleteClick }) => {
+const ProductListing = ({ products, handleEditProduct, handleDeleteProduct }) => {
   
   return (
     <div className="product-listing">
@@ -14,7 +14,8 @@ const ProductListing = ({ products, onDeleteClick }) => {
             title={product.title}
             price={product.price}
             quantity={product.quantity}
-            onDeleteClick={onDeleteClick}
+            handleEditProduct={handleEditProduct}
+            handleDeleteProduct={handleDeleteProduct}
           />
           )}       
       </ul>

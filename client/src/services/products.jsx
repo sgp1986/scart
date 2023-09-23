@@ -10,7 +10,10 @@ export const createProduct = async (newProduct) => {
   return data
 }
 
-// update
+export const editProduct = async (productId, product) => {
+  const { data } = await axios.put(`/api/products/${productId}`, product.newTitle, product.newPrice, product.newQuantity)
+  return data
+}
 
 export const deleteProduct = async (productId) => {
   const { data } = await axios.delete(`/api/products/${productId}`)
