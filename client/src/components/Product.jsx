@@ -1,33 +1,32 @@
 import { useState } from "react"
 
-const Product = ({id, title, price, quantity, handleEditProduct, handleDeleteProduct}) => {
+const Product = ({id, title, price, quantity, handleEditProduct, handleDeleteProduct, handleAddToCart}) => {
   const [editableProduct, setEditableProduct] = useState(false)
   return (
     <>
-      <li className="product" key={id}>
-        <ProductDetails 
-          id={id}
-          title={title}
-          price={price}
-          quantity={quantity}
-          handleDeleteProduct={handleDeleteProduct}
-          setEditableProduct={setEditableProduct}
-        />
-        <ProductEditForm
-          id={id}
-          title={title}
-          price={price}
-          quantity={quantity}
-          editableProduct={editableProduct}
-          setEditableProduct={setEditableProduct}
-          handleEditProduct={handleEditProduct}
-        />
-      </li>
+      <ProductDetails 
+        id={id}
+        title={title}
+        price={price}
+        quantity={quantity}
+        handleDeleteProduct={handleDeleteProduct}
+        setEditableProduct={setEditableProduct}
+        handleAddToCart={handleAddToCart}
+      />
+      <ProductEditForm
+        id={id}
+        title={title}
+        price={price}
+        quantity={quantity}
+        editableProduct={editableProduct}
+        setEditableProduct={setEditableProduct}
+        handleEditProduct={handleEditProduct}
+      />
     </>
   )
 }
 
-const ProductDetails = ({id, title, price, quantity, handleDeleteProduct, setEditableProduct}) => {
+const ProductDetails = ({id, title, price, quantity, handleDeleteProduct, setEditableProduct, handleAddToCart}) => {
 
   const deleteProduct = () => {
     handleDeleteProduct(event, id)
@@ -37,13 +36,17 @@ const ProductDetails = ({id, title, price, quantity, handleDeleteProduct, setEdi
     setEditableProduct(true)
   }
 
+  const addToCart = () => {
+    handleAddToCart(event, id)
+  }
+
   return (
     <div className="product-details">
       <h3>{title}</h3>
       <p className="price">${price}</p>
       <p className="quantity">{quantity} left in stock</p>
       <div className="actions product-actions">
-        <button className="add-to-cart">Add to Cart</button>
+        <button className="add-to-cart" onClick={addToCart}>Add to Cart</button>
         <button className="edit" onClick={displayEditForm}>Edit</button>
       </div>
       <button className="delete-button" onClick={deleteProduct}><span>X</span></button>

@@ -11,7 +11,7 @@ export const createProduct = async (newProduct) => {
 }
 
 export const editProduct = async (productId, product) => {
-  const { data } = await axios.put(`/api/products/${productId}`, product.newTitle, product.newPrice, product.newQuantity)
+  const { data } = await axios.put(`/api/products/${productId}`, product)
   return data
 }
 
